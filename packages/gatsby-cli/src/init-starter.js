@@ -31,6 +31,20 @@ const shouldUseYarn = () => {
 const gitInit = async rootPath => {
   report.info(`Initialising git in ${rootPath}`)
 
+  let curDir = rootPath
+
+  while (curDir.split(`/`).length > 1) {
+    if (existsSync(sysPath.join(curDir, `.git`))) {
+      return
+    }
+
+    curDir = sysPath.resolve(curDir, `..`)
+  }
+
+  if (existsSync(sysPath.join(`.git`))) {
+    return
+  }
+
   return await spawn(`git init`, { cwd: rootPath })
 }
 
