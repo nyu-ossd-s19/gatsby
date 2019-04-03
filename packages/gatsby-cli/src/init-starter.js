@@ -43,6 +43,8 @@ const gitInit = async rootPath => {
     return
   }
 
+  report.info(`Initialising git in ${rootPath}`)
+
   return await spawn(`git init`, { cwd: rootPath })
 }
 
