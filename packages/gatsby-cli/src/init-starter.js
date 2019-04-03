@@ -43,6 +43,8 @@ const gitInit = async rootPath => {
     return
   }
 
+  report.info(`Initialising git in ${rootPath}`)
+
   return await spawn(`git init`, { cwd: rootPath })
 }
 
@@ -178,4 +180,3 @@ module.exports = async (starter: string, options: InitOptions = {}) => {
   if (hostedInfo) await clone(hostedInfo, rootPath)
   else await copy(starter, rootPath)
 }
-
