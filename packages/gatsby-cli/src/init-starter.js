@@ -29,11 +29,9 @@ const shouldUseYarn = () => {
 
 // Initialize newly cloned directory as a git repo
 const gitInit = async rootPath => {
-  report.info(`Initialising git in ${rootPath}`)
+  let curDir = sysPath.normalize(rootPath)
 
-  let curDir = sysPath.normalize(rootPath);
-
-  while (curDir !== "/" && curDir !== "C:\\") {
+  while (curDir !== sysPath.parse(curDir).root) {
     if (existsSync(sysPath.join(curDir, `.git`))) {
       return
     }
